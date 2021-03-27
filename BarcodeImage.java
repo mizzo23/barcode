@@ -8,6 +8,8 @@ public class BarcodeImage implements Cloneable
 
    /**
     * @author Kevin Daill
+    * James Meaden wrote initial constructor for testing
+    * Kevin, you may need to verify.
     */
    public BarcodeImage()
    {
@@ -31,13 +33,13 @@ public class BarcodeImage implements Cloneable
    {
 
    }
-   
+   /*Used by James for Testing
    public boolean[][] getImageData()
    {
       imageData = new boolean[MAX_HEIGHT][MAX_WIDTH];
       return imageData;
    }
-   
+   */
    /**
     * 
     * @param row
@@ -121,8 +123,8 @@ public class BarcodeImage implements Cloneable
 
    /**
     * 
-    * @param obj
-    * @return
+    * @
+    * @return BarcodeImage a cloned copy of the BarcodeImage Object
     * @author James Meaden
     */
    public Object clone()
@@ -131,7 +133,8 @@ public class BarcodeImage implements Cloneable
       {
          BarcodeImage copy = (BarcodeImage)super.clone();
          
-    
+         /*imageData is an array, which is a mutable Object
+         /therefore, this code below creates a deep copy of imageData*/
          copy.imageData = new boolean[MAX_HEIGHT][MAX_WIDTH];
          for (int x = 0; x < MAX_HEIGHT; x++)
          {
@@ -142,13 +145,11 @@ public class BarcodeImage implements Cloneable
          }
          
          return copy;
-         
       }
       catch(CloneNotSupportedException e)
       {
          return null;
-      }
-      
+      } 
    }
 }
 

@@ -1,18 +1,27 @@
+package barcodepackage;
 
 public class BarcodeImage implements Cloneable
 {
    public static final int MAX_HEIGHT = 30;
    public static final int MAX_WIDTH = 65;
    private boolean[][] imageData = null;
-   
+
    /**
     * @author Kevin Daill
     */
    public BarcodeImage()
    {
-      
+      imageData = new boolean[MAX_HEIGHT][MAX_WIDTH];
+      for (int x = 0; x < MAX_HEIGHT; x++)
+      {
+         for (int y = 0; y < MAX_WIDTH; y++)
+         {
+            imageData[x][y] = false;
+         }
+      }
+      //System.out.println(imageData[0][0]);
    }
-   
+
    /**
     * 
     * @param strData
@@ -20,7 +29,13 @@ public class BarcodeImage implements Cloneable
     */
    public BarcodeImage(String[] strData)
    {
-      
+
+   }
+   
+   public boolean[][] getImageData()
+   {
+      imageData = new boolean[MAX_HEIGHT][MAX_WIDTH];
+      return imageData;
    }
    
    /**
@@ -33,11 +48,15 @@ public class BarcodeImage implements Cloneable
    public boolean getPixel(int row, int col)
    {
       if (row > 0 || col > 0 || row < MAX_HEIGHT || col < MAX_WIDTH)
+      {
+         //boolean[][] newImageData = new boolean [row][col];
+         //return newImageData[row][col];
          return imageData[row][col];
+      }
       else
          return false;
    }
-   
+
    /**
     * 
     * @param row
@@ -52,11 +71,10 @@ public class BarcodeImage implements Cloneable
       {
          imageData[row][col] = value;
          return true;
-      }
-      else
+      } else
          return false;
    }
-   
+
    /**
     * 
     * @param data
@@ -65,15 +83,15 @@ public class BarcodeImage implements Cloneable
     */
    private boolean checkSize(String[] data)
    {
-      return false; //stub
+      return false; // stub
    }
-   
+
    /**
     * @author Nathan Huven2
     */
    public void displayToConsole()
    {
-      //char pixel;
+      // char pixel;
 
       if (imageData != null)
       {
@@ -87,22 +105,20 @@ public class BarcodeImage implements Cloneable
             if (imageData[row] != null)
                for (int col = 0; col < imageData[row].length; col++)
                {
-                  /*if (getPixel(row, col) == true)
-                     pixel = '*';
-                  else
-                     pixel = ' ';
-                  System.out.printf("%c", pixel);*/
+                  /*
+                   * if (getPixel(row, col) == true) pixel = '*'; else pixel = ' ';
+                   * System.out.printf("%c", pixel);
+                   */
                   System.out.printf("%-6s", getPixel(row, col));
                }
             else
                System.out.print("is null");
             System.out.println();
          }
-      }
-      else
+      } else
          System.out.println("imageData is null");
    }
-   
+
    /**
     * 
     * @param obj
@@ -111,6 +127,29 @@ public class BarcodeImage implements Cloneable
     */
    public Object clone()
    {
-      return obj; //stub
+      try
+      {
+         BarcodeImage copy = (BarcodeImage)super.clone();
+         
+    
+         copy.imageData = new boolean[MAX_HEIGHT][MAX_WIDTH];
+         for (int x = 0; x < MAX_HEIGHT; x++)
+         {
+            for (int y = 0; y < MAX_WIDTH; y++)
+            {
+               copy.imageData[x][y] = imageData[x][y];
+            }
+         }
+         
+         return copy;
+         
+      }
+      catch(CloneNotSupportedException e)
+      {
+         return null;
+      }
+      
    }
 }
+
+

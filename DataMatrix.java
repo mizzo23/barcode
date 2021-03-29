@@ -1,3 +1,4 @@
+package barcodepackage;
 
 public class DataMatrix implements BarcodeIO
 {
@@ -11,22 +12,26 @@ public class DataMatrix implements BarcodeIO
    /**
     * Dependencies: Default BarcodeImage constructor, readText()
     * 
-    * @author Person 1
+    * @author James Meaden,
     */
    public DataMatrix()
    {
-      
+      image = new BarcodeImage();
+      text = "";
+      actualWidth = 0;
+      actualHeight = 0;
    }
    
    /**
     * Dependencies: Scan()
     * 
-    * @param image
-    * @author Dependent on Scan
+    * @param image Dependent on Scan
+    * @author James Meaden
     */
    public DataMatrix(BarcodeImage image)
    {
-      
+      this.image = image; //set Class variable image to argument value image
+      scan(this.image);
    }
    
    /**
@@ -42,8 +47,8 @@ public class DataMatrix implements BarcodeIO
    /**
     * Dependencies: None
     * 
-    * @return
-    * @author
+    * @return int
+    * @author James Meaden
     */
    public int getActualWidth()
    {
@@ -185,12 +190,36 @@ public class DataMatrix implements BarcodeIO
     * its spine properly situated in bottom left corner, which can be created 
     * manually or by using clone() on the example strings
     * 
-    * @author
+    * @author James Meaden
     */
    public void displayImageToConsole()
    {
-      // TODO Auto-generated method stub
-      
+      int borderWidth = image.MAX_WIDTH + 2; //add 2 for the side bars
+      int borderHeight = image.MAX_HEIGHT + 2;//add 2 for the top bars
+            
+      //Print top border
+      for (int x = 0; x < borderWidth ; x++)
+      {
+         System.out.print("-");
+      }
+      //Outer loop controls what row is being printed
+      for (int y = 0; y < borderHeight; y++)
+      {
+         System.out.print("|");//print leading left bar border
+         
+         //Inner loop will print the values of the image for the row
+         for (int z = 0; z < borderWidth; z++)
+         {
+            System.out.print(image.getPixel(y, z));
+         }
+         
+         System.out.print("|");//print trailing right bar
+      }
+      //Print bottom border
+      for (int w = 0; w < borderWidth ; w++)
+      {
+         System.out.print("-");
+      }  
    }
    
    /**

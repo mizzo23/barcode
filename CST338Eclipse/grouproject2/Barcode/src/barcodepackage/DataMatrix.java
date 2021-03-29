@@ -12,7 +12,7 @@ public class DataMatrix implements BarcodeIO
    /**
     * Dependencies: Default BarcodeImage constructor, readText()
     * 
-    * @author James Meaden
+    * @author James Meaden,
     */
    public DataMatrix()
    {

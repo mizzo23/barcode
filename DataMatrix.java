@@ -67,11 +67,31 @@ public class DataMatrix implements BarcodeIO
     * manually or by using clone() on the example strings
     * 
     * @return
-    * @author
+    * @author Josiah Sanchez
     */
    private int computeSignalWidth()
    {
-      return 0; //stub
+      int signalWidth = 0;
+      
+      //iterate through bottom row of array
+      for (int x = 0; x < actualWidth; x++)
+      {
+         /*
+          * need to get the pixel on the bottom row of the array
+          * (assuming that it is already situated at bottom of array)
+          * if true, we add to the signal width. We use the final row in the
+          * array, because it is our closed limitation line, consisting only of
+          * true values (located in last row). Hence the constant actualHeight.
+          * 
+          * getPixel(int row, int col)
+          */
+         if (image.getPixel(actualHeight, x))
+         {
+            signalWidth++;
+         }
+      }
+      
+      return signalWidth; //stub
    }
    
    /**
@@ -79,11 +99,26 @@ public class DataMatrix implements BarcodeIO
     * its spine properly situated in bottom left corner, which can be created 
     * manually or by using clone() on the example strings
     * 
-    * @author
+    * @author Josiah Sanchez
     */
    private int computeSignalHeight()
    {
+      int signalHeight = 0;
       
+      for (int x = 0; x < actualHeight; x++)
+      {
+         /*
+          * If the pixel in the first position of each row is true,
+          * we can then add to the height of the signal. We only need to 
+          * check the closed limitation lines for this method, hence the 
+          * constant 0 in image.getPixel(x, 0)
+          * coming from the method getPixel(int row, int col).
+          */
+         if (image.getPixel(x, 0))
+            signalHeight++;
+      }
+      
+      return signalHeight;
    }
    
    /**
@@ -126,7 +161,7 @@ public class DataMatrix implements BarcodeIO
     * its spine properly situated in bottom left corner, which can be created 
     * manually or by using clone() on the example strings
     * 
-    * @author
+    * @author Josiah Sanchez
     */
    public boolean translateImageToText()
    {

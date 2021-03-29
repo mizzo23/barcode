@@ -1,9 +1,14 @@
+package barcodepackage;
 
 public class Assig4
 {
 
    public static void main(String[] args)
    {
+      
+      System.out.println("Barcode Main Method\n");
+      
+ 
       String[] sImageIn =
       {
          "                                               ",
